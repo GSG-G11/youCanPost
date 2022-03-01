@@ -10,4 +10,8 @@ const selectPost = (user_id) => connection.query({
   values: [user_id],
 });
 
-module.exports = { storePost, selectPost };
+const selectAllPosts = () => connection.query({
+  text: 'SELECT * FROM POSTS',
+});
+
+module.exports = { storePost, selectPost, selectAllPosts };
