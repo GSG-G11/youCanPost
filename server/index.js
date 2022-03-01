@@ -1,12 +1,16 @@
 const express = require('express');
+const app = require('./app');
+const routes = require('./routes');
 
-const app = express();
-const port = 3000;
+const router = express.Router();
+app.set('port', process.env.PORT || 3000);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+router.get('/', (req, res) => {
+  res.send('its working');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.use('/', routes);
+
+app.listen(app.get('port'), () => {
+  console.log('App running on port', app.get('port'));
 });
