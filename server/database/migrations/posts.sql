@@ -1,0 +1,12 @@
+BEGIN;
+DROP TABLE IF EXISTS posts CASCADE;
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER ,
+    title VARCHAR(256) NOT NULL,
+    content TEXT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+COMMIT;
