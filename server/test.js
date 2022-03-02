@@ -78,10 +78,18 @@ describe("Test database fuctions", () => {
   });
   test("Get All posts from posts table", () => {
     const expected = 7;
-    return selectAllUsers().then((data) => {
+    return selectAllPosts().then((data) => {
       expect(data.rows.length).toBe(expected);
     });
   });
+  test("Get All posts related to user id with user information", () => {
+    const expected = "Muhammad";
+    return userPosts(1).then((data) => {
+      expect(data.rows[0].name).toBe(expected);
+      expect(data.rows[0].title).toBe("first post from user 1");
+    });
+  });
+
 });
 
 afterAll(() => connection.end());
