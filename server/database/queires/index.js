@@ -9,6 +9,8 @@ const {
   userPosts,
 } = require('./users');
 
+const { storePost, selectPost, selectAllPosts } = require('./post');
+
 module.exports = {
   store,
   selectAllUsers,
@@ -18,4 +20,7 @@ module.exports = {
   deleteUser,
   userWithName,
   userPosts,
+  storePost,
+  selectPost,
+  selectAllPosts,
 };
