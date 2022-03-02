@@ -3,12 +3,12 @@ require('env2')('config.env');
 const { Pool } = require('pg');
 
 const {
-  NODE_ENV, DB_URL, DEV_DB_URL, TEST_DB_URL,
+  NODE_ENV, DB_URL, DEV_DB_URL, TEST_DB_URL, DATABASE_URL,
 } = process.env;
 
 let dbUrl = '';
 if (NODE_ENV === 'production') {
-  dbUrl = DB_URL;
+  dbUrl = DATABASE_URL;
 } else if (NODE_ENV === 'development') {
   dbUrl = DEV_DB_URL;
 } else if (NODE_ENV === 'test') {
@@ -19,7 +19,7 @@ if (NODE_ENV === 'production') {
 
 const options = {
   connectionString: dbUrl,
-  ssl: false,
+  ssl: { rejectUnauthorized: false },
 };
 
 const connection = new Pool(options);
