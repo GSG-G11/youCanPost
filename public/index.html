@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./style.css" rel="stylesheet" > 
     <title>youCanPost</title>
   </head>
   <body>
     <div class="nav">
       <h1>youCanPost</h1>
     </div>
-    <a href="./html/login.html">login</a>
+    <section class="form-cont">
     <form class="signup">
       <input
         class="input-field"
@@ -29,8 +30,15 @@
         required
       />
       <p id ="error"></p>
-      <button type="submit">signup</button>
-    </form>    
+      <button type="submit" class="signup-btn">Sign Up</button>
+      <div class="to-signin">
+        <p>if you have an accout...</p>
+        <a href="./html/login.html">login</a>
+      </div>
+      
+
+    </form>
+  </section>    
     <script src="./js/index.js"></script>
   </body>
 </html>
