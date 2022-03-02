@@ -8,6 +8,7 @@ const {
   deleteUser,
   userWithName,
   userPosts,
+  storePost,
 } = require('../database/queires');
 
 const router = express.Router();
@@ -61,6 +62,14 @@ router.put('/update-user', (req, res) => {
 
 router.delete('/user/:id', (req, res) => {
   deleteUser(req.params.id)
+    .then((result) => res.json(result.rows))
+    .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
+});
+
+router.post('/create-post', (req, res) => {
+  const { user_id, title, content } = req.body;
+  console.log( user_id, title, content );
+  storePost(user_id, title, content)
     .then((result) => res.json(result.rows))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
 });
