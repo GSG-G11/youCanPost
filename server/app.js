@@ -1,7 +1,7 @@
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const app = express();
-const router = require('./routes');
+const router = require('./controllers/userController');
 
 const filePath = path.join(__dirname, '..', '..', 'public');
 
