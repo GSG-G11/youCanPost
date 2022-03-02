@@ -5,6 +5,8 @@ const {
   selectUserByIdWithPassword,
   selectUserById,
   deleteUser,
+  userWithName,
+  userPosts,
 } = require('./users');
 
 module.exports = {
@@ -14,4 +16,6 @@ module.exports = {
   selectUserByIdWithPassword,
   selectUserById,
   deleteUser,
+  userWithName,
+  userPosts,
 };

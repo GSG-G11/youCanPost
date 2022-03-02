@@ -6,7 +6,7 @@ const router = require('./controllers/userController');
 const filePath = path.join(__dirname, '..', '..', 'public');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(filePath));
 app.use(router);
