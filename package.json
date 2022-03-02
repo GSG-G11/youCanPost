@@ -8,7 +8,8 @@
     "dev": "set NODE_ENV=development&&nodemon server/index.js",
     "test": "set NODE_ENV=test&&jest",
     "db": "set NODE_ENV=test&&node server/database/config/connection.js",
-    "user_migrate": "set NODE_ENV=development&&node server/database/migrations/create_user_table.js"
+    "user_migrate": "set NODE_ENV=development&&node server/database/migrations/create_user_table.js",
+    "post_migrate": "set NODE_ENV=development&&node server/database/migrations/create_posts_table.js"
   },
   "repository": {
     "type": "git",
