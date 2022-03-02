@@ -22,6 +22,32 @@ form.addEventListener('submit', (e) => {
     });
 });
 
+const displayPosts = (data) => {
+  const postsContainer = document.querySelector('.posts-cont');
+  data.forEach((element) => {
+    const postCard = document.createElement('div');
+    postCard.classList = 'post-card';
+    const owner = document.createElement('h4');
+    owner.classList = 'owner';
+    const line = document.createElement('hr');
+    const title = document.createElement('h4');
+    title.classList = 'title';
+    const content = document.createElement('p');
+    content.classList = 'content';
+
+    owner.innerText = element.name;
+    title.innerText = element.title;
+    content.innerText = element.content;
+
+    postCard.appendChild(owner);
+    postCard.appendChild(line);
+    postCard.appendChild(title);
+    postCard.appendChild(content);
+
+    postsContainer.appendChild(postCard);
+  });
+};
+
 const details = {
   method: 'GET',
   headers: {
@@ -32,4 +58,5 @@ fetch('/allposts', details)
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
+    displayPosts(data);
   });
