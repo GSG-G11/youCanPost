@@ -21,3 +21,15 @@ form.addEventListener('submit', (e) => {
       err.textContent = 'login fail';
     });
 });
+
+const details = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+fetch('/allposts', details)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  });
