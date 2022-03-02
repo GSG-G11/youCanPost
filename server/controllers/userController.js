@@ -9,6 +9,7 @@ const {
   userWithName,
   userPosts,
   storePost,
+  selectAllPosts,
 } = require('../database/queires');
 
 const router = express.Router();
@@ -72,6 +73,12 @@ router.post('/create-post', (req, res) => {
   storePost(user_id, title, content)
     .then((result) => res.json(result.rows))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
+});
+
+router.get('/allposts', (req, res) => {
+  selectAllPosts()
+    .then((result) => res.json(result.rows))
+    .then(data => console.log(data))
 });
 
 module.exports = router;

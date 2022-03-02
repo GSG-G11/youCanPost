@@ -6,12 +6,13 @@ const storePost = (user_id, title, content) => connection.query({
 });
 
 const selectPost = (user_id) => connection.query({
-  text: 'SELECT * FROM POSTS WHERE user_id = ($1)',
+  text: 'SELECT * FROM POSTS WHERE user_id = ($1);',
   values: [user_id],
 });
 
 const selectAllPosts = () => connection.query({
-  text: 'SELECT * FROM POSTS',
+  text: 'select users.name, posts.title, posts.content from users join posts ON posts.user_id =users.id;',
 });
+
 
 module.exports = { storePost, selectPost, selectAllPosts };
