@@ -1,7 +1,7 @@
 const connection = require('../config/connection');
 // insert to users
 const store = (name, password) => connection.query({
-  text: 'INSERT INTO users (name, password) VALUES ($1, $2);',
+  text: 'INSERT INTO users (name, password) VALUES ($1, $2) Returning * ;',
   values: [name, password],
 });
 
@@ -37,6 +37,18 @@ const deleteUser = (id) => connection.query({
   values: [id],
 });
 
+// get the first user with name
+const userWithName = (name) => connection.query({
+  text: 'SELECT * FROM users WHERE name = ($1) limit 1',
+  values: [name],
+});
+
+// get the posts related to user user with name
+const userPosts = (id) => connection.query({
+  text: 'select users.name, posts.title, posts.content from users join posts ON posts.user_id =users.id where users.id = ($1)',
+  values: [id],
+});
+
 module.exports = {
   store,
   selectAllUsers,
@@ -44,4 +56,6 @@ module.exports = {
   selectUserByIdWithPassword,
   selectUserById,
   deleteUser,
+  userWithName,
+  userPosts,
 };

@@ -6,6 +6,8 @@ const {
   selectUserByIdWithPassword,
   selectUserById,
   deleteUser,
+  userWithName,
+  userPosts,
 } = require('../database/queires');
 
 const router = express.Router();
@@ -17,8 +19,23 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/home/:id', (req, res) => {
-  selectUserByIdWithPassword(req.params.id)
-    .then((result) => res.json(result.rows))
+  console.log(req.params.id);
+  userPosts(req.params.id)
+    .then((data) => res.json(data.rows))
+    .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
+});
+
+router.post('/login', (req, res) => {
+  const { name, password } = req.body;
+  userWithName(name)
+    .then((result) => {
+      console.log(result.rows.password);
+      if (password === result.rows[0].password) {
+        res.json({ loged: true, id: result.rows[0].id });
+      } else {
+        res.json({ loged: false });
+      }
+    })
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
 });
 
@@ -31,12 +48,12 @@ router.get('/user/:id', (req, res) => {
 router.post('/create-user', (req, res) => {
   const { name, password } = req.body;
   store(name, password)
-    .then((result) => res.redirect('/'))
+    .then((result) => res.json({ loged: true, id: result.rows[0].id }))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
 });
 
 router.put('/update-user', (req, res) => {
-  const {id, name, password } = req.body;
+  const { id, name, password } = req.body;
   updateUserById(id, name, password)
     .then((result) => res.redirect('/'))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
