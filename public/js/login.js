@@ -5,7 +5,6 @@ const err = document.querySelector('#error');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(name.value, password.value);
   fetch('/login', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },

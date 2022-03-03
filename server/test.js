@@ -18,7 +18,6 @@ describe("Test database fuctions", () => {
   test("Get User By Id from users table", () => {
     const expected = "Muhammad";
     return selectUserById(1).then((data) => {
-      console.log(data.rows);
       expect(data.rows[0].name).toEqual(expected);
     });
   });

@@ -21,7 +21,6 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/home/:id', (req, res) => {
-  console.log(req.params.id);
   userPosts(req.params.id)
     .then((data) => res.json(data.rows))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
@@ -31,7 +30,6 @@ router.post('/login', (req, res) => {
   const { name, password } = req.body;
   userWithName(name)
     .then((result) => {
-      console.log(result.rows.password);
       if (password === result.rows[0].password) {
         res.json({ loged: true, id: result.rows[0].id });
       } else {
@@ -69,7 +67,6 @@ router.delete('/user/:id', (req, res) => {
 
 router.post('/create-post', (req, res) => {
   const { user_id, title, content } = req.body;
-  console.log( user_id, title, content );
   storePost(user_id, title, content)
     .then((result) => res.json(result.rows))
     .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
@@ -78,7 +75,7 @@ router.post('/create-post', (req, res) => {
 router.get('/allposts', (req, res) => {
   selectAllPosts()
     .then((result) => res.json(result.rows))
-    .then(data => console.log(data))
+    .catch((err) => res.status(500).json({ msg: 'Internal Server Error' }));
 });
 
 module.exports = router;
