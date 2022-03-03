@@ -4,33 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../style.css" rel="stylesheet" />
     <title>youCanPost</title>
   </head>
   <body>
     <div class="nav">
       <h1>youCanPost</h1>
     </div>
-    <a href="../index.html">signup</a>
-    <form class="login">
-      <input
-        class="input-field"
-        type="text"
-        id="name"
-        name="name"
-        placeholder="name"
-        required
-      />
-      <input
-        class="input-field"
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        required
-      />
-      <p id ="error"></p>
-      <button type="submit">login</button>
-    </form>    
+
+    <section class="form-cont">
+      <form class="signup login">
+        <input
+          class="input-field"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="name"
+          required
+        />
+        <input
+          class="input-field"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <p id="error"></p>
+        <button type="submit" class="signup-btn">Sign Up</button>
+        <div class="to-signin">
+          <p>if you have an accout...</p>
+          <a href="../index.html">signup</a>
+        </div>
+      </form>
+    </section>
     <script src="../js/login.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@ const err = document.querySelector('#error');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(name.value, password.value);
   fetch('/create-user', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -57,6 +56,5 @@ const details = {
 fetch('/allposts', details)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     displayPosts(data);
   });

@@ -4,65 +4,84 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../style.css" rel="stylesheet" />
     <title>Home</title>
   </head>
   <body>
     <h1>homePage</h1>
-    <form class="post">
-      <input
-        class="input-field"
-        type="text"
-        id="title"
-        name="title"
-        placeholder="name"
-        required
-      />
-      <input
-        class="input-field"
-        type="text"
-        id="content"
-        name="content"
-        placeholder="Password"
-        required
-      />
-      <p id="error"></p>
-      <button type="submit">signup</button>
-    </form>
+    <section class="form-cont">
+      <form class="signup post">
+        <input
+          class="input-field"
+          type="text"
+          id="title"
+          name="title"
+          placeholder="title"
+          required
+        />
+        <input
+          class="input-field"
+          type="text"
+          id="content"
+          name="content"
+          placeholder="content"
+          required
+        />
+        <p id="error"></p>
+        <button type="submit" class="signup-btn">New Post</button>
+      </form>
+    </section>
+    <div class="posts-cont"></div>
     <div class="posts"></div>
     <script>
-            let id = window.location.search.substr(1).split("=")[1];
-            const posts = document.querySelector('.posts')
-            const form = document.querySelector('.post')
-            const title = document.querySelector('#title');
-            const content = document.querySelector('#content');
-            console.log(id);
-            fetch(`/home/${id}`)
-              .then((response) => response.json())
-              .then((data) => {
-                data.forEach((element) => {
-                  const div = document.createElement("div");
-                  const name = document.createElement("div");
-                  const title = document.createElement("div");
-                  const content = document.createElement("div");
-                  name.textContent = element.name;
-                  title.textContent = element.title;
-                  content.textContent = element.content;
-                  div.appendChild(name);
-                  div.appendChild(title);
-                  div.appendChild(content);
-                  posts.appendChild(div);
-                });
-              })
+      let id = window.location.search.substr(1).split("=")[1];
+      const posts = document.querySelector(".posts");
+      const form = document.querySelector(".post");
+      const title = document.querySelector("#title");
+      const content = document.querySelector("#content");
+      
+      fetch(`/home/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const postsContainer = document.querySelector(".posts-cont");
 
-              form.addEventListener('submit', (e) => {
+          data.forEach((element) => {
+            const postCard = document.createElement("div");
+            postCard.classList = "post-card";
+            const owner = document.createElement("h4");
+            owner.classList = "owner";
+            const line = document.createElement("hr");
+            const title = document.createElement("h4");
+            title.classList = "title";
+            const content = document.createElement("p");
+            content.classList = "content";
+
+            owner.innerText = element.name;
+            title.innerText = element.title;
+            content.innerText = element.content;
+
+            postCard.appendChild(owner);
+            postCard.appendChild(line);
+            postCard.appendChild(title);
+            postCard.appendChild(content);
+
+            postsContainer.appendChild(postCard);
+          });
+        });
+
+      form.addEventListener("submit", (e) => {
         e.preventDefault();
-        fetch('/create-post', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({user_id : id, title: title.value, content: content.value }),
-        }).then((response) => response.json())
-          .then((data) => { console.log(data);
-          })
+        fetch("/create-post", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            user_id: id,
+            title: title.value,
+            content: content.value,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {})
           .catch((err) => {
             console.log(err);
           });
